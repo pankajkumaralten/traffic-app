@@ -1,4 +1,4 @@
-package org.example.traffic.entity;
+package com.example.traffic.entity;
 
 import jakarta.persistence.*;
 import java.util.Objects;

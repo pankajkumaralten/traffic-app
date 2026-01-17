@@ -1,4 +1,4 @@
-package org.example.traffic.enums;
+package com.example.traffic.enums;
 
 public enum LightColor {
     RED, YELLOW, GREEN }

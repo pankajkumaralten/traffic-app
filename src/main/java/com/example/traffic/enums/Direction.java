@@ -1,4 +1,6 @@
 package com.example.traffic.enums;
 
-public class Direction {
+public enum Direction {
+    NORTH_SOUTH,
+    EAST_WEST
 }

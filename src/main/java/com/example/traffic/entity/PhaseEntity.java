@@ -1,7 +1,8 @@
-package org.example.traffic.entity;
+package com.example.traffic.entity;
 
-import com.example.traffic.domain.Direction;
-import com.example.traffic.domain.LightColor;
+
+import com.example.traffic.enums.Direction;
+import com.example.traffic.enums.LightColor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import java.util.EnumMap;

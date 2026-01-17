@@ -1,7 +1,9 @@
 package com.example.traffic.dto;
 
-import com.example.traffic.domain.Direction;
-import com.example.traffic.domain.LightColor;
+
+import com.example.traffic.enums.Direction;
+import com.example.traffic.enums.LightColor;
+
 import java.util.Map;
 
 public class StateResponse {

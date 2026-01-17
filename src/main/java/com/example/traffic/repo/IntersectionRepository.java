@@ -1,4 +1,6 @@
-package org.example.traffic.repo;
+package com.example.traffic.repo;
 
-public class IntersectionRepository {
-}
+import com.example.traffic.entity.Intersection;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IntersectionRepository extends JpaRepository<Intersection, String> {}

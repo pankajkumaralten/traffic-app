@@ -1,4 +1,4 @@
-package com.example.traffic.controller;
+package com.example.traffic.service;
 
 
 import com.example.traffic.entity.HistoryEntryEntity;
@@ -10,6 +10,7 @@ import com.example.traffic.enums.LightColor;
 import com.example.traffic.repo.HistoryEntryRepository;
 import com.example.traffic.repo.IntersectionRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -18,17 +19,13 @@ import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
-public class TrafficLightController {
-
-    private final IntersectionRepository intersectionRepo;
-    private final HistoryEntryRepository historyRepo;
+public class TrafficLightService {
+    @Autowired
+    private  IntersectionRepository intersectionRepo;
+    @Autowired
+    private  HistoryEntryRepository historyRepo;
 
     private final Map<String, ControllerState> controllers = new ConcurrentHashMap<>();
-
-    public TrafficLightController(IntersectionRepository intersectionRepo, HistoryEntryRepository historyRepo) {
-        this.intersectionRepo = intersectionRepo;
-        this.historyRepo = historyRepo;
-    }
 
     @Transactional
     public Intersection createOrUpdate(String id, SequenceEntity sequence) {
@@ -52,9 +49,16 @@ public class TrafficLightController {
         return intersectionRepo.findAll().stream().map(Intersection::getId).toList();
     }
 
-    public void start(String id, Integer phaseIndex) {
+    public void start1(String id, Integer phaseIndex) {
         ControllerState st = controllers.computeIfAbsent(id, ControllerState::new);
         st.start(phaseIndex, this::recordHistory);
+    }
+
+    public void start(String id, Integer phaseIndex) {
+        ControllerState st = controllers.computeIfAbsent(id, ControllerState::new);
+
+        // Concise lambda expression
+        st.start(phaseIndex, (i_id, p_idx, states) -> this.recordHistory(i_id, p_idx, states));
     }
 
     public void pause(String id) {
