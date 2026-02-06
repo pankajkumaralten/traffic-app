@@ -1,6 +1,7 @@
 package com.example.traffic.controller;
 
 import com.example.traffic.dto.*;
+import com.example.traffic.entity.HistoryEntryEntity;
 import com.example.traffic.entity.Intersection;
 import com.example.traffic.service.IntersectionRegistry;
 import com.example.traffic.service.TrafficLightService;
@@ -59,13 +60,15 @@ public class TrafficLightController {
     @GetMapping("/{id}/history")
     public ResponseEntity<HistoryResponse> getHistory(@PathVariable String id) {
         DateTimeFormatter fmt = DateTimeFormatter.ISO_INSTANT;
-        return registry.get(id)
+       return registry.get(id)
                 .map(inter -> controller.getHistory(id))
-                .map(list -> list.stream()
+                .map(list -> list.stream().limit(100)
                         .map(h -> new HistoryEntryDto(fmt.format(h.getTimestamp()), h.getPhaseIndex(), h.getStates()))
                         .toList())
                 .map(entries -> ResponseEntity.ok(new HistoryResponse(id, entries)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+
+
     }
 
     @GetMapping

@@ -13,9 +13,9 @@ import java.util.Optional;
 @Service
 public class IntersectionRegistry {
     @Autowired
-    private  TrafficLightService controller;
+    TrafficLightService controller;
     @Autowired
-    private  MapperService mapper;
+    MapperService mapper;
 
 
     public Intersection createOrUpdate(String id, SequenceDto dto) {

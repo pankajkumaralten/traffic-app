@@ -20,6 +20,10 @@ public class Intersection {
         this.sequence = sequence;
     }
 
+    public Intersection(String a1) {
+        this.id = a1;
+    }
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 

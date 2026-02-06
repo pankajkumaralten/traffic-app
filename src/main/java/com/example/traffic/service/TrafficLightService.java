@@ -21,9 +21,9 @@ import java.util.concurrent.locks.ReentrantLock;
 @Service
 public class TrafficLightService {
     @Autowired
-    private  IntersectionRepository intersectionRepo;
+    IntersectionRepository intersectionRepo;
     @Autowired
-    private  HistoryEntryRepository historyRepo;
+    HistoryEntryRepository historyRepo;
 
     private final Map<String, ControllerState> controllers = new ConcurrentHashMap<>();
 
